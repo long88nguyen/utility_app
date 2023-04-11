@@ -21,7 +21,6 @@
 </head>
 
 <body>
-    ds
     <div id="app">
         <app-page></app-page>
     </div>

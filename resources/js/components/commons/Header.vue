@@ -1,20 +1,20 @@
 <template>
   <div class="header_layout">
     <a-row>
-      <a-col :xxl="4" :xl="4" :lg="4">
+      <a-col :xxl="4" :xl="4" :lg="4" :xs="6">
         <div class="header_logo">
           <div class="header_logo-image">
-            <!-- <img src="../../uploads/logo/logo_web.png" alt="" srcset="" /> -->
+            <img src="../../uploads/logo/logo_web.png" alt="" srcset="" />
           </div>
         </div>
       </a-col>
-      <a-col :xxl="14" :xl="14" :lg="14">
+      <a-col :xxl="14" :xl="14" :lg="14" :xs="12">
         <div class="header_option">
 
         </div>
       </a-col>
 
-      <a-col :xxl="6" :xl="6" :lg="6">
+      <a-col :xxl="6" :xl="6" :lg="6" :xs="6">
         <div class="header_account">
             <img src="../../uploads/logo/user_icon_logo.png" alt="" srcset="">
         </div>
