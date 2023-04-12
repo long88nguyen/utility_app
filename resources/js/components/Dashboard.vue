@@ -1,6 +1,6 @@
 <template>
     <HeaderVue/>
-    <ContentVue/>
+    <router-view></router-view>
     <FooterVue/>
     </template>
 

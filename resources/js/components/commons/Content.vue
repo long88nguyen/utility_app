@@ -22,12 +22,14 @@
         <div class="content_layout-product">
           <div class="row">
             <div class="content_card card1">
-              <h5>Japan</h5>
-              
+              <router-link to="/calculate">
+                <h5>Japan</h5>
+              </router-link>
+                
             </div>
+
             <div class="content_card card2">
               <h5>Asean</h5>
-             
             </div>
             <div class="content_card card3">
               <h5>Turkey</h5>
@@ -93,7 +95,6 @@ export default {};
         color: white;
         font-size: 30px;
         font-weight: bold;
-
       }
     }
     .content_card:hover {
@@ -121,13 +122,13 @@ export default {};
       display: none;
     }
 
-    .content_layout-product{
-        display: flex;
-        .content_card{
-            width: 45%;
-            margin:10px;
-            height: 250px;
-        }
+    .content_layout-product {
+      display: flex;
+      .content_card {
+        width: 45%;
+        margin: 10px;
+        height: 250px;
+      }
     }
   }
 }
