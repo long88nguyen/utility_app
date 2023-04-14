@@ -22,8 +22,8 @@
         <div class="content_layout-product">
           <div class="row">
             <div class="content_card card1">
-              <router-link to="/calculate">
-                <h5>Japan</h5>
+              <router-link to="/bmi">
+                <h5>BMI</h5>
               </router-link>
                 
             </div>

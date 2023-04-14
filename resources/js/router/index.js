@@ -1,8 +1,8 @@
 import { createRouter,createWebHistory } from "vue-router";
 
-import MainPage from "../components/CalculateMBI/MainPage.vue"
 import ContentPage from "../components/commons/Content.vue"
-import NotFound from "../components/NotFound.vue";
+import NotFound from "../components/NotFound.vue"
+import BMIIndex from '../components/BMI/Index.vue'
 
 const routes = [
     {
@@ -11,9 +11,28 @@ const routes = [
         name: "ContentPage",
     },
     {
-        path: '/calculate',
-        component: MainPage,
-        name: "CalculateMBI",
+        path: '/bmi',
+        component: BMIIndex,
+        name: "BMIIndex",
+        children:[
+            {
+                path:'',
+                component: import('../components/BMI/components/ListOptionBMI.vue'),
+                name:'ListOptionBMI',
+            },
+            {
+                path:'compare-bmi',
+                component: import('../components/BMI/components/CompareBMI.vue'),
+                name:'CompareBMI',
+            },
+            {
+                path:'calculator-bmi',
+                component: import('../components/BMI/components/BMICalculator.vue'),
+                name:'BMICalculator',
+            }
+        ]
+
+
     },
     {
         path: '/not-found',

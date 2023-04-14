@@ -1,8 +1,6 @@
 <template>
   <div class="calculate_page">
-    <router-link to="/" class="back_icon"
-      ><i class="fa-solid fa-arrow-right-from-bracket"></i
-    ></router-link>
+   
       <div class="text-center">
         <h4 class="text-light">Kiểm tra chỉ số BMI</h4>
       </div>
@@ -16,7 +14,7 @@
       <div class="content_alert" v-if="errorHeightMessage">
         Vui lòng nhập chiều cao của bạn từ <span class="validation">20cm</span> đến <span  class="validation">250cm</span>
       </div>
-      <img src="../../uploads/sticker/sticker2.png" alt="" srcset="" />
+      <img src="../../../uploads/sticker/sticker2.png" alt="" srcset="" />
     </div>
     <div
       class="steps-content step_two"
@@ -28,7 +26,7 @@
       <div class="content_alert" v-if="errorWeightMessage">
         Vui lòng nhập cân nặng của bạn từ <span  class="validation">20kg</span> đến <span  class="validation">500kg</span>
       </div>
-      <img src="../../uploads/sticker/sticker1.png" alt="" srcset="" />
+      <img src="../../../uploads/sticker/sticker1.png" alt="" srcset="" />
     </div>
     <div class="steps-action">
       <a-button v-if="current < steps.length - 1" type="primary" @click="next">
@@ -63,7 +61,7 @@
       <span v-if="calculateBMI > 35" style="color:purple" >Béo phì nguy hiểm</span>
 
     </h6>
-    <img src="../../uploads/sticker/sticker3.png" alt="" srcset="" >
+    <img src="../../../uploads/sticker/sticker3.png" alt="" srcset="" >
 
   </a-modal>
   <!-- $message.success('Processing complete!') -->
