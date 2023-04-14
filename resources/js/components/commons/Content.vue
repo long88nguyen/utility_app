@@ -29,13 +29,19 @@
             </div>
 
             <div class="content_card card2">
+              <router-link to="/not-found">
               <h5>Asean</h5>
+              </router-link>
             </div>
             <div class="content_card card3">
+              <router-link to="/not-found">
               <h5>Turkey</h5>
+            </router-link>
             </div>
             <div class="content_card card4">
+              <router-link to="/not-found">
               <h5>Ballon</h5>
+              </router-link>
             </div>
           </div>
         </div>

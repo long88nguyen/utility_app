@@ -14,6 +14,12 @@ const routes = [
         component: MainPage,
         name: "CalculateMBI",
     },
+    {
+        path: '/not-found',
+        component: import("../components/NotFound.vue"),
+        name: "NotFoundPage",
+    },
+   
 ]
 
 const router = createRouter({
