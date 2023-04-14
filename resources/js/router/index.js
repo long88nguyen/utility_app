@@ -2,6 +2,7 @@ import { createRouter,createWebHistory } from "vue-router";
 
 import MainPage from "../components/CalculateMBI/MainPage.vue"
 import ContentPage from "../components/commons/Content.vue"
+import NotFound from "../components/NotFound.vue";
 
 const routes = [
     {
@@ -16,7 +17,7 @@ const routes = [
     },
     {
         path: '/not-found',
-        component: import("../components/NotFound.vue"),
+        component: NotFound,
         name: "NotFoundPage",
     },
    

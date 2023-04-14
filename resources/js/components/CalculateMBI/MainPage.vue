@@ -70,7 +70,6 @@
 </template>
 
 <script>
-import { log } from 'console';
 
 export default {
   data() {
