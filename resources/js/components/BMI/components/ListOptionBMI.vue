@@ -13,9 +13,9 @@
             </div>
             <div class="col-xl-3 col-lg-3 col-md-4 col-xs-6">
                 <div class="item_option option_3">
-                    <h4>
+                    <router-link to="/bmi/compare-bmi"><h4>
                         Compare with other people
-                    </h4>
+                    </h4></router-link>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-4 col-xs-6">

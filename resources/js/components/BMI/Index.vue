@@ -6,8 +6,7 @@
       ></router-link>
     </div>
     <h1 class="text-center">The Body Mass Index (BMI) Calculator</h1>
-
-    <router-view></router-view>
+      <router-view></router-view>
   </div>
 </template>
 

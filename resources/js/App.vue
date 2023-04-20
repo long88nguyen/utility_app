@@ -1,8 +1,6 @@
 <template>
     <div class="utility_app">
-        <div class="container">
-        <Dashboard/>
-    </div>
+        <router-view></router-view>
     </div>
    
 </template>
@@ -25,11 +23,5 @@ export default {
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
-.utility_app{
-    background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(uploads/pgss.png) ;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-    background-position: center;
-}
+
 </style>
