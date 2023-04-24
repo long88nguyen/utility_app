@@ -3,7 +3,7 @@
         <h1>Compare BMI</h1>
 
         <h4>
-           {{ getMembers}}
+           {{ authList}}?
         </h4>
     </div>  
     
@@ -11,23 +11,30 @@
 
 <script>
 import { ref, onMounted, computed } from "vue";
-import { memberStore } from '../../../stores/member'
+import { memberStore } from "../../../stores/modules/memberStore";
+import { authStore } from "../../../stores/modules/authStore";
 export default {
     setup(){
         const getMemberStore = memberStore();
+        const auth = authStore();
 
-        const getMembers = computed(() => {
-        return getMemberStore.getMembers;
-        });
+        // const getMembers = computed(() => {
+        // return getMemberStore.getMembers;
+        // });
         const members = computed(() => {
         return getMemberStore.members;
         });
+
+        const authList = computed(() => {
+        return auth.token;
+        });
+
         onMounted(() => {
             fetchDataMember();
         });
 
         const fetchDataMember = () => {
-            getMemberStore.fetchMembers().then(()=>{
+            getMemberStore.fetchDataMembers().then(()=>{
             }).catch(() => {
             });
         }
@@ -35,8 +42,9 @@ export default {
 
         return {
             getMemberStore,
-            getMembers,
             members,
+            auth,
+            authList,
             fetchDataMember
         }
     }

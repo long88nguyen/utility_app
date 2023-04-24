@@ -10,8 +10,9 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { authStore } from '../../stores/modules/authStore';
+const auth = authStore();
 </script>
 
 <style scoped lang="scss">

@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import ContentPage from "../components/commons/Content.vue"
 import NotFound from "../components/NotFound.vue"
 import BMIIndex from '../components/BMI/Index.vue'
+import { authStore } from "../stores/modules/authStore";
 
 const routes = [
     {
@@ -29,6 +29,9 @@ const routes = [
                 path: '/bmi',
                 component: BMIIndex,
                 name: "BMIIndex",
+                meta:{
+                    authGuard:true,
+                },
                 children: [
                     {
                         path: '',

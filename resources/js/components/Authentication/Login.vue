@@ -3,14 +3,14 @@
     <div class="container">
       <div class="login_form">
         <h1>login form</h1>
-        <form action="" @submit.prevent="login">
+        <form @submit.prevent="login">
             <div class="control">
                 <label for="">Name</label>
-                <input type="text" v-model="email">
+                <input type="text" v-model="user.email">
             </div>
             <div class="control">
                 <label for="">Password</label>
-                <input type="password" v-model="password">
+                <input type="password" v-model="user.password">
             </div>
             <span>
                 <input type="checkbox" class=""> Remember me
@@ -27,21 +27,25 @@
   </div>
 </template>
 
-<script>
-import { authStore } from '../../stores/auth';
-import { storeToRefs } from 'pinia';
-export default {
-    setup(){
-      const { email,password } = storeToRefs(authStore());
+<script setup>
+import { ref } from "vue";
+import { authStore } from "../../stores/modules/authStore";
+import { useRouter } from "vue-router";
 
-      const { login } = authStore();
-      return {
-        email,
-        password,
-        login
-      }
-    }
+const auth = authStore();
+const router = useRouter();
+
+const user = ref({
+  email: "",
+  password: "",
+});
+
+const login = async () => {
+  const response = await auth.login(user.value);
+  if (response.status == 200)
+   await router.push({ path: "/" });
 };
+
 </script>
 
 <style lang="scss" scoped>

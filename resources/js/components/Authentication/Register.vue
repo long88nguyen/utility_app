@@ -42,35 +42,8 @@
 
 <script>
 
-import { authStore } from '../../stores/auth';
-import moment from 'moment';
-import { ref } from 'vue';
 export default {
-    setup(){
-
-        const getAuthStore = authStore();
-
-        const form =  ref({
-            email:'',
-            birth:'',
-        })
-
-        const changeDate = (data) => {
-            form.value.birth = moment(data).format('YYYY-MM-DD');
-        }
-
-       
-        const register = async() => {
-            getAuthStore.register(form.value);
-        }
-
-        return {
-            changeDate,
-            register,
-            getAuthStore,
-            form
-        }
-    }
+  
 }
 </script>
 <style lang="scss" scoped>
