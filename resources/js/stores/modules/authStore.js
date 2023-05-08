@@ -14,7 +14,7 @@ export const authStore = defineStore({
     id:'auth',
     state: () => ({
         user:null,
-        token:  Cookies.get("access_token") ? Cookies.get("access_token") : '',
+        token: null,
     }),
  
     actions: {
@@ -22,11 +22,10 @@ export const authStore = defineStore({
             let url = "/api/login";
             const response = await service.post(url, params);
             if (response.data?.success == true && response.status == 200) {
-              Cookies.set('access_token',response.data.result.token);
+              this.token = response.data.result.token;
               this.user = response?.data.result.user;
             }
             return response;
-        
           },
     },
 

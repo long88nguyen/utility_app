@@ -67,78 +67,79 @@
   <!-- $message.success('Processing complete!') -->
 </template>
 
-<script>
+<script setup>
+  import { ref,reactive,computed } from 'vue';
+  import { message } from 'ant-design-vue'
 
-export default {
-  data() {
-    return {
-      YourHeight: null,
-      YourWeight: null,
-      errorHeightMessage:false,
-      errorWeightMessage:false,
-      visible: false,
-      current: 0,
-      steps: [
-        {
-          title: "First",
-          content: "First-content",
-        },
-        {
-          title: "Second",
-          content: "Second-content",
-        },
-      ],
-    };
-  },
-  computed:{
-    calculateBMI(){
-        let result = this.YourWeight / (this.YourHeight / 100 * 2 )
-        return Math.round(result * 100) / 100;
+  let current = ref(0);
+  const YourHeight = ref(null);
+  const YourWeight = ref(null);
+  const errorHeightMessage = ref(false);
+  const errorWeightMessage = ref(false);
+  const visible = ref(false);
+  const steps = reactive([
+
+          {
+            title: "First",
+            content: "First-content",
+          },
+          {
+            title: "Second",
+            content: "Second-content",
+          },  
+  ])
+  const valid = () => 
+  {
+      errorHeightMessage.value = false
+      errorWeightMessage.value = false
+      let isValid = true;
+      if(!YourHeight.value || YourHeight.value < 20 || YourHeight.value > 250)
+      {
+        errorHeightMessage.value = true,
+        isValid = false;
+      }
+
+      if(steps[current.value].content == 'Second-content' && (!YourWeight.value || YourWeight.value < 20 || YourWeight.value > 500))
+      {
+        errorWeightMessage.value = true,
+        isValid = false;
+      }
+
+      return isValid;  
+  }
+
+  const CalculateValue = () => {
+    if(valid())
+    {
+      visible.value = true;
     }
-  },
-  methods: {
-    valid(){
-      this.errorHeightMessage = false
-      this.errorWeightMessage = false
-      let isValid = true
-      if(!this.YourHeight || this.YourHeight < 20 || this.YourHeight > 250)
-      {
-        this.errorHeightMessage = true,
-        isValid = false;
-      }
+  }
 
-      if(this.steps[this.current].content == 'Second-content' && (!this.YourWeight || this.YourWeight < 20 || this.YourWeight > 500))
-      {
-        this.errorWeightMessage = true,
-        isValid = false;
-      }
+  const calculateBMI = computed(() => {
+          let result = YourWeight.value / (YourHeight.value / 100 * 2 )
+          return Math.round(result * 100) / 100;
+  });
 
-      return isValid;
-    },
-    next() {
-      if(this.valid())
-      {
-      this.current++;
-      }
-    },
-    prev() {
-      this.current--;
-    },
-    CalculateValue() {
-      if(this.valid())
-      {
-      this.visible = true;  
-      }
-      
-    },
-    handleOk() {
-      this.visible = false;
-    },
-    handleCancel() {
-      this.visible = false;
-    },
-  },
-};
+  const handleOk = () => {
+    visible.value = false
+  }
+
+  const handleCancel = () => {
+    visible.value = false
+  }
+
+  const next = () => {
+    if(valid())
+    {
+      current.value++;
+
+    }
+  }
+
+  const prev = () => {
+    current.value--
+  }
+
 </script>
 
 <style lang="scss" scoped>

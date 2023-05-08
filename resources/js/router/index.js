@@ -52,6 +52,11 @@ const routes = [
                         path: 'compare-bmi',
                         component: import('../components/BMI/components/CompareBMI.vue'),
                         name: 'CompareBMI',
+                    },
+                    {
+                        path: 'suggest-health',
+                        component: import('../components/BMI/components/SuggestHealth.vue'),
+                        name: 'Suggest Health',
                     }
                 ]
             }

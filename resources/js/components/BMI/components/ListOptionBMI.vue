@@ -20,9 +20,9 @@
             </div>
             <div class="col-xl-3 col-lg-3 col-md-4 col-xs-6">
                 <div class="item_option option_4">
-                    <h4>
+                    <router-link to="/bmi/suggest-health"> <h4>
                     Suggest
-                    </h4>
+                    </h4></router-link>
                 </div>
             </div>
         </div>
