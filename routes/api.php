@@ -20,6 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login',[\App\Http\Controllers\AuthController::class,'login']);
 Route::post('/register',[\App\Http\Controllers\AuthController::class,'register']);
+Route::get('/send-mail',[\App\Http\Controllers\SendMailController::class,'sendMail']);
+Route::post('/reset-password', [\App\Http\Controllers\AuthController::class, 'resetPassword']);
+Route::post('/change-password', [\App\Http\Controllers\AuthController::class, 'changePassword']);
+Route::get('/verify-reset-request', [\App\Http\Controllers\AuthController::class, 'verifyResetPasswordRequest']);
 Route::group(['middleware' => 'auth:api'], function () {
     
 });

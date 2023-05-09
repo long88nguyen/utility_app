@@ -68,6 +68,34 @@ trait ApiResponsesTrait
     {
         return $this->apiResponse(['success' => true, 'message' => $message]);
     }
+
+    protected function respondNoContent($message = 'No Content Found'): JsonResponse
+    {
+        return $this->apiResponse(['success' => false, 'message' => $message], Response::HTTP_NO_CONTENT);
+    }
+
+    protected function respondNotFound($message = 'Not Found'): JsonResponse
+    {
+        return $this->respondError($message, Response::HTTP_NOT_FOUND);
+    }
+
+    protected function respondForbidden($message = 'Forbidden'): JsonResponse
+    {
+        return $this->respondError($message, Response::HTTP_FORBIDDEN);
+    }
+
+    protected function respondError($message, int $statusCode = Response::HTTP_BAD_REQUEST, Exception $exception = null, int $error_code = 1)
+    {
+        return $this->apiResponse(
+            [
+                'success' => false,
+                'message' => $message ?? 'There was an internal error, Please try again later',
+                'exception' => $exception,
+                'error_code' => $error_code
+            ], $statusCode
+        );
+    }
+
     
     protected function respondWithResourceCollection(ResourceCollection $resourceCollection, $statusCode = Response::HTTP_OK, $headers = []): JsonResponse
     { 

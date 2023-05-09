@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Enums\ErrorType;
 use App\Models\Member;
 use App\Http\Controllers\ApiController;
+use App\Http\Requests\Authentication\ChangePasswordRequest;
+use App\Http\Requests\Authentication\PasswordResetRequest;
 use App\Http\Requests\Authentication\RegisterRequest;
+use App\Jobs\SendResetPasswordEmail;
 use App\Models\User;
 use App\Services\MemberService;
 use Carbon\Carbon;
@@ -15,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str; 
 
 class AuthController extends ApiController
 {
@@ -113,6 +117,57 @@ class AuthController extends ApiController
         return response()->json([
             'status' => 'success',
         ]);
+    }
+
+    public function resetPassword(PasswordResetRequest $request){
+        $uid = str_replace('-', '', Str::uuid()->toString());
+        $email = $request->validated('email');
+        $user = User::where('email', '=', $email)->first();
+        if($user){
+            $data = [
+                'resetpw' => $uid,
+                'resetpw_expiry' => Carbon::now()->addHours(24)->toDateTimeString(),
+            ];
+
+            $user->update($data);
+            $this->dispatch(new SendResetPasswordEmail($email, [
+                'id' => $user->id,
+                'resetpw' => $uid,
+            ]));
+        }
+        else
+        {
+            return $this->respondSuccess("Email không tồn tại !");
+        }
+
+        return $this->respondSuccess("Yêu cầu khôi phục mật khẩu của bạn đã được gửi đến email $email !");
+    }
+
+    public function verifyResetPasswordRequest(Request $request){
+        if(User::firstWhere([
+            ['resetpw', '=', $request->get('resetpw')],
+            ['resetpw_expiry', '>=', Carbon::now()],
+        ]))
+            return $this->respondNoContent();
+        else
+            return $this->respondNotFound();
+    }
+
+    public function changePassword(ChangePasswordRequest $request){
+        $user = User::firstWhere([
+            ['resetpw', '=', $request->validated('resetpw')],
+            ['resetpw_expiry', '>=', Carbon::now()],
+        ]);
+
+        if($user){
+            $user->update([
+                'password' => bcrypt($request->validated('password')),
+                'resetpw' => null,
+                'resetpw_expiry' => null,
+            ]);
+            return $this->respondSuccess("Mật khẩu của bạn đã được thay đổi thành công!!!");
+        }
+        return $this->respondError("Yêu cầu đã hết hạn!!!");
     }
 
     public function SaveMember($requestMember)
