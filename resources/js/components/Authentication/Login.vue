@@ -4,23 +4,42 @@
       <div class="login_form">
         <h1>login form</h1>
         <form @submit.prevent="login">
-            <div class="control">
-                <label for="">Name</label>
-                <input type="text" v-model="user.email">
+          <div class="control">
+            <label for="">Name</label>
+            <input type="text" v-model="user.email" />
+            <div v-if="hasError">
+              <div
+                v-for="(err, index) in messageErr.errors?.email"
+                class="text-danger"
+                :key="index"
+              >
+                {{ err }}
+              </div>
             </div>
-            <div class="control">
-                <label for="">Password</label>
-                <input type="password" v-model="user.password">
+          </div>
+          <div class="control">
+            <label for="">Password</label>
+            <input type="password" v-model="user.password" />
+            <div v-if="hasError">
+              <div
+                v-for="(err, index) in messageErr.errors?.password"
+                class="text-danger"
+                :key="index"
+              >
+                {{ err }}
+              </div>
             </div>
-            <span>
-                <input type="checkbox" class=""> Remember me
-            </span>
-            <div class="control">
+          </div>
+          <span> <input type="checkbox" class="" /> Remember me </span>
+          <div class="control">
             <button class="btn btn-info" type="submit">Login</button>
-            </div>
+          </div>
         </form>
         <div class="link text-center">
-         Do you have account? <router-link to="/register">Sign up</router-link>
+          Do you have account? <router-link to="/register">Sign up</router-link>
+        </div>
+        <div class="link text-center">
+          <router-link to="/forgot-password">Forgot password ?</router-link>
         </div>
       </div>
     </div>
@@ -28,13 +47,15 @@
 </template>
 
 <script setup>
+import Toast from "../../helpers/toast.js";
 import { ref } from "vue";
 import { authStore } from "../../stores/modules/authStore";
 import { useRouter } from "vue-router";
 
 const auth = authStore();
 const router = useRouter();
-
+const hasError = ref("");
+const messageErr = ref([]);
 const user = ref({
   email: "",
   password: "",
@@ -42,56 +63,72 @@ const user = ref({
 
 const login = async () => {
   const response = await auth.login(user.value);
-  if (response.status == 200)
-   await router.push({ path: "/" });
-};
 
+  console.log(response);
+  if (response.data?.success) {
+    await router.push({ path: "/" });
+    Toast.fire({
+      icon: "success",
+      title: "Đăng nhập thành công",
+    });
+    (hasError.value = ""), (messageErr.value = []);
+  } else {
+    hasError.value = true;
+    messageErr.value = response;
+    if(response.message)
+    {
+      Toast.fire({
+      icon: "error",
+      title: response.message,
+    });
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 .login_layout {
-  background-image: 
-    url(../../uploads/pgss2.png);
+  background-image: url(../../uploads/pgss2.png);
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
   background-position: center;
   color: white;
-  .login_form{
-        position:absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
-        width: 380px;
-        padding: 50px 30px;
-        border-radius:10px;
-        box-shadow: 7px 7px 60px #000;
+  .login_form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    width: 380px;
+    padding: 50px 30px;
+    border-radius: 10px;
+    box-shadow: 7px 7px 60px #000;
   }
-  h1{
+  h1 {
     text-transform: uppercase;
     font-size: 2em;
     text-align: center;
     margin-bottom: 2em;
-    color:white;
+    color: white;
   }
 
-  .control{
+  .control {
     margin: 1em 0;
 
-    input{
-        width: 100%;
-        display: block;
-        padding: 10px;
-        color:#000;
-        border:none;
-        outline: none;
-        margin: 1em 0;
-        border-radius: 5px;
+    input {
+      width: 100%;
+      display: block;
+      padding: 10px;
+      color: #000;
+      border: none;
+      outline: none;
+      margin: 1em 0;
+      border-radius: 5px;
     }
 
-    button{
-        width: 100%;
+    button {
+      width: 100%;
     }
   }
 }

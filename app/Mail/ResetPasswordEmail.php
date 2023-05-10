@@ -3,10 +3,7 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class ResetPasswordEmail extends Mailable
@@ -20,7 +17,9 @@ class ResetPasswordEmail extends Mailable
         $this->data = $data;
     }
 
+
     public function build(){
-        return $this->subject('Yêu cầu reset lại mật khẩu ?')->view('mail.forgot_password');
+        return $this->subject('Yêu cầu reset lại mật khẩu ?')
+        ->view('mail.forgot_password');
     }
 }

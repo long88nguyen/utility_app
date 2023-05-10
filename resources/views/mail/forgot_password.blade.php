@@ -8,10 +8,9 @@
 </head>
 <body>
     <p>Xin chào Ban,</p>
-    <p>Xin chào {{$data}},</p>
     <p>Chúng tôi vừa nhận được yêu cầu thay đổi mật khẩu cho tài khoản cua ban</p>
     <p>Để thay đổi mật khẩu vui lòng bấm vào link sau và làm theo hướng dẫn. (Chú ý: link sẽ hết hạn sau 24 giờ)</p>
-    <a href="google.com" title="Thay đổi mật khẩu">Thay đổi mật khẩu</a>
+    <a href="{{ config('client.url')}}/change-password?resetpw={{$data['resetpw']}}" title="Thay đổi mật khẩu">Thay đổi mật khẩu</a>
     <p>Nếu bạn không phải là người gửi yêu cầu xin vui lòng bỏ qua email này!</p>
     <p>Xin cảm ơn!</p>
 </body>

@@ -13,6 +13,7 @@
 <script setup>
 import { authStore } from '../../stores/modules/authStore';
 const auth = authStore();
+console.log(auth.user);
 
 </script>
 

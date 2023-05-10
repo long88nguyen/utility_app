@@ -16,6 +16,16 @@ const routes = [
         name: 'register',
     },
     {
+        path: '/forgot-password',
+        component: import('../components/Authentication/ForgotPassword.vue'),
+        name: 'forgot-password',
+    },
+    {
+        path: '/change-password',
+        component: import('../components/Authentication/ChangePassword.vue'),
+        name: 'change-password',
+    },
+    {
         path: '/',
         component: import('../components/Dashboard.vue'),
         name: 'dashboard',

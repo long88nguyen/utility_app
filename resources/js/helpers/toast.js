@@ -2,7 +2,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 export default Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: 'top',
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,

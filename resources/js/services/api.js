@@ -1,7 +1,7 @@
 import axios from "axios";
 import { authStore } from "../stores/modules/authStore.js";
 
-axios.defaults.baseURL = "http://127.0.0.1:8888";
+// axios.defaults.baseURL = "http://127.0.0.1:8888";
 axios.defaults.headers.common["contentType"] = "application/json";
 axios.defaults.headers.common["Cache-Control"] = "no-cache";
 axios.defaults.headers.common["Cache-control"] = "no-store";

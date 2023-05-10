@@ -6,6 +6,7 @@ use App\Enums\ErrorType;
 use App\Models\Member;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\Authentication\ChangePasswordRequest;
+use App\Http\Requests\Authentication\LoginRequest;
 use App\Http\Requests\Authentication\PasswordResetRequest;
 use App\Http\Requests\Authentication\RegisterRequest;
 use App\Jobs\SendResetPasswordEmail;
@@ -81,16 +82,12 @@ class AuthController extends ApiController
     }
 
 
-    public function login(Request $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
         $credentials = request(['email', 'password']);
         if (!Auth::attempt($credentials)) {
 
-            return response()->json([
-                'status' => 'fails',
-                'message' => 'Unauthorized',
-                'code' => 401
-            ], 401);
+            return $this->respondError('Đăng nhập không thành công! Vui lòng kiểm tra lại');
         }
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
@@ -120,6 +117,7 @@ class AuthController extends ApiController
     }
 
     public function resetPassword(PasswordResetRequest $request){
+        
         $uid = str_replace('-', '', Str::uuid()->toString());
         $email = $request->validated('email');
         $user = User::where('email', '=', $email)->first();
@@ -137,7 +135,7 @@ class AuthController extends ApiController
         }
         else
         {
-            return $this->respondSuccess("Email không tồn tại !");
+            return $this->respondError("Email không tồn tại !");
         }
 
         return $this->respondSuccess("Yêu cầu khôi phục mật khẩu của bạn đã được gửi đến email $email !");
@@ -154,6 +152,7 @@ class AuthController extends ApiController
     }
 
     public function changePassword(ChangePasswordRequest $request){
+        
         $user = User::firstWhere([
             ['resetpw', '=', $request->validated('resetpw')],
             ['resetpw_expiry', '>=', Carbon::now()],
