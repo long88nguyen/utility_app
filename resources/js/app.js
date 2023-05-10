@@ -5,6 +5,7 @@ import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n'
 import { createPinia } from 'pinia'
 import router from './router'
+import i18n from "./i18n"
 
 import "sweetalert2/dist/sweetalert2.min.css";
 import "./assets/css/custom-sweetalert2.css";
@@ -19,6 +20,7 @@ const pinia = createPinia();
 
 app.provide("$toast", toast)
 app.use(VueSweetalert2)
+app.use(i18n);
 app.use(Antd)
 app.use(pinia)
 app.use(router)

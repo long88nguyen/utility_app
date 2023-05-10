@@ -31,7 +31,7 @@
 
             <div class="content_card card2">
               <router-link to="/not-found">
-              <h5>Asean</h5>
+              <h5>{{ $t('nation.japan') }}</h5>
               </router-link>
             </div>
             <div class="content_card card3">
@@ -88,8 +88,8 @@ export default {
   .content_layout-product {
     height: calc(100vh - 120px);
     .content_card {
-      width: 280px;
-      height: 310px;
+      width: 240px;
+      height: 240px;
       display: flex;
       align-items: center;
       justify-content: center;
