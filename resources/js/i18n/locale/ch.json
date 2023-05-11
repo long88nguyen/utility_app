@@ -1,0 +1,23 @@
+{
+    "nation": {
+        "japan": "日本",
+        "turkey": "火鸡",
+        "english": "英语",
+        "vietnamese": "越南语"
+    },
+    "authentication":{
+        "login":{
+            "login_title": "登录表单",
+            "email": "电子邮件",
+            "name": "姓名",
+            "password": "密码",
+            "signin": "登入",
+            "remember_me": "记住账号",
+            "account_none": "还没有账号？",
+            "sign_up": "报名",
+            "forgot_password": "忘记密码?"
+        }
+    },
+    "login_success": "登陆成功",
+    "4000": "登录失败 ！请再试一次"
+}

@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard_app">
-    <OptionTop/>
     <div class="container">
       <HeaderVue />
         <ContentVue>
@@ -11,7 +10,6 @@
 </template>
 
 <script>
-import OptionTop from "./commons/OptionTop.vue";
 import HeaderVue from "./commons/Header.vue";
 import ContentVue from "./commons/Content.vue";
 import FooterVue from "./commons/Footer.vue";
@@ -21,7 +19,6 @@ export default {
     HeaderVue,
     ContentVue,
     FooterVue,
-    OptionTop
   },
 };
 </script>

@@ -13,11 +13,15 @@ const selectLanguage = ref('en')
 const listLanguage = reactive([
     {
         'flag': 'en',
-        'language': i18n.global.t('nation.english'),
+        'language': "English",
     },
     {
         'flag': 'vi',
-        'language': i18n.global.t('nation.vietnamese'),
+        'language': "Vietnamese",
+    },
+    {
+        'flag': 'ch',
+        'language': "Chinese",
     }
 ]);
 
@@ -30,7 +34,6 @@ const changeselect = () =>{
 
 <style scoped lang="scss">
 .option_top{
-    height: 50px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
     select{
         width: 200px;

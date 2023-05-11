@@ -1,16 +1,20 @@
 <template>
+    
     <div class="utility_app">
+        <OptionTop/>
         <router-view></router-view>
     </div>
    
 </template>
 
 <script>
+import OptionTop from  "./components/commons/OptionTop.vue"
 import Dashboard from './components/Dashboard.vue';
 
 export default {
     components:{
-        Dashboard
+        Dashboard,
+        OptionTop,
     }
 }
 </script>

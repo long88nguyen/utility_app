@@ -84,14 +84,15 @@ trait ApiResponsesTrait
         return $this->respondError($message, Response::HTTP_FORBIDDEN);
     }
 
-    protected function respondError($message, int $statusCode = Response::HTTP_BAD_REQUEST, Exception $exception = null, int $error_code = 1)
+    protected function respondError($message, int $statusCode = Response::HTTP_BAD_REQUEST, Exception $exception = null, int $error_code = 1, int $number_code = null)
     {
         return $this->apiResponse(
             [
                 'success' => false,
                 'message' => $message ?? 'There was an internal error, Please try again later',
                 'exception' => $exception,
-                'error_code' => $error_code
+                'error_code' => $error_code,
+                'number_code' => $number_code ?? null
             ], $statusCode
         );
     }

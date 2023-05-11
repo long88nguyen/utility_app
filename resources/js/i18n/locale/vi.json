@@ -1,8 +1,23 @@
 {
-    "nation": {
-        "japan": "Nhật Bản",
-        "turkey": "Thổ Nhĩ Kỳ",
-        "english": "Tiếng Anh",
-        "vietnamese": "Tiếng Việt"
-      }
+  "nation": {
+    "japan": "Nhật Bản",
+    "turkey": "Thổ Nhĩ Kỳ",
+    "english": "Tiếng Anh",
+    "vietnamese": "Tiếng Việt"
+  },
+  "authentication": {
+    "login": {
+      "login_title": "Đăng nhập",
+      "email": "Email",
+      "name": "Name",
+      "password": "Mật khẩu",
+      "signin": "Đăng nhập",
+      "remember_me": "Nhớ mật khẩu",
+      "account_none": "Bạn chưa có tài khoản?",
+      "sign_up": "Đăng ký",
+      "forgot_password": "Quên mật khẩu ?"
+    }
+  },
+  "login_success": "Đăng nhập thành công",
+  "4000": "Đăng nhập không thành công! vui lòng kiểm tra lại"
 }

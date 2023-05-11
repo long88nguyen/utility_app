@@ -4,6 +4,22 @@
         "turkey": "Turkey",
         "english": "English",
         "vietnamese": "Vietnamese"
-    }
+    },
+    "authentication":{
+        "login":{
+            "login_title": "Login Form",
+            "email": "Email",
+            "name": "Name",
+            "password": "Password",
+            "signin": "Sign in",
+            "remember_me": "Remember Me",
+            "account_none": "Do not have an account?",
+            "sign_up": "Sign up",
+            "forgot_password": "Forgot Password ?"
+        }
+    },
+    "login_success": "Login successfull",
+    "4000": "Login failed ! Please try again"
+
 }
 

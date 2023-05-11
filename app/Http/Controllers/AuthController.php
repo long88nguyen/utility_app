@@ -51,6 +51,7 @@ class AuthController extends ApiController
                     'errors' => $validator->errors()->toArray(),
                 ]);
             }
+            dd($data);
             $user = new User([
                 'email' => $request->input('email'),
                 'password' => bcrypt($request->input('password')),
@@ -60,7 +61,7 @@ class AuthController extends ApiController
             $this->SaveMember([
                 'user_id' => $user->id,
                 'name' => $data['name'],
-                'gender' => $data['gender'],
+                'gender' => $data['gender'] ? $data['gender'] : 0,
                 'birthday' => $data['birthday'],
             ]);
 
@@ -87,7 +88,7 @@ class AuthController extends ApiController
         $credentials = request(['email', 'password']);
         if (!Auth::attempt($credentials)) {
 
-            return $this->respondError('Đăng nhập không thành công! Vui lòng kiểm tra lại');
+            return $this->respondError(4000);
         }
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');

@@ -1,11 +1,12 @@
 <template>
   <div class="login_layout">
+    <OptionTop/>
     <div class="container">
       <div class="login_form">
-        <h1>login form</h1>
+        <h1>{{ $t('authentication.login.login_title') }}</h1>
         <form @submit.prevent="login">
           <div class="control">
-            <label for="">Name</label>
+            <label for="">{{ $t('authentication.login.email') }}</label>
             <input type="text" v-model="user.email" />
             <div v-if="hasError">
               <div
@@ -18,7 +19,7 @@
             </div>
           </div>
           <div class="control">
-            <label for="">Password</label>
+            <label for="">{{ $t('authentication.login.password')}}</label>
             <input type="password" v-model="user.password" />
             <div v-if="hasError">
               <div
@@ -30,16 +31,16 @@
               </div>
             </div>
           </div>
-          <span> <input type="checkbox" class="" /> Remember me </span>
+          <span> <input type="checkbox" class="" /> {{ $t('authentication.login.remember_me')}} </span>
           <div class="control">
-            <button class="btn btn-info" type="submit">Login</button>
+            <button class="btn btn-info" type="submit">{{ $t('authentication.login.signin')}}</button>
           </div>
         </form>
         <div class="link text-center">
-          Do you have account? <router-link to="/register">Sign up</router-link>
+         {{ $t('authentication.login.account_none')}} <router-link to="/register">{{ $t('authentication.login.sign_up')}}</router-link>
         </div>
         <div class="link text-center">
-          <router-link to="/forgot-password">Forgot password ?</router-link>
+          <router-link to="/forgot-password">{{ $t('authentication.login.forgot_password')}}</router-link>
         </div>
       </div>
     </div>
@@ -51,6 +52,8 @@ import Toast from "../../helpers/toast.js";
 import { ref } from "vue";
 import { authStore } from "../../stores/modules/authStore";
 import { useRouter } from "vue-router";
+import i18n from "../../i18n";
+
 
 const auth = authStore();
 const router = useRouter();
@@ -69,17 +72,18 @@ const login = async () => {
     await router.push({ path: "/" });
     Toast.fire({
       icon: "success",
-      title: "Đăng nhập thành công",
+      title: i18n.global.t('login_success'),
     });
     (hasError.value = ""), (messageErr.value = []);
   } else {
+    console.log(response);
     hasError.value = true;
     messageErr.value = response;
     if(response.message)
     {
       Toast.fire({
       icon: "error",
-      title: response.message,
+      title: i18n.global.t(response.message),
     });
     }
   }
